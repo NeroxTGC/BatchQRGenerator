@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, QrCode } from 'lucide-react';
 import DarkModeSwitcher from '../../client/components/DarkModeSwitcher';
+import { routes } from 'wasp/client/router'
+import { Link } from 'react-router-dom';
 
 interface NavigationItem {
   name: string;
@@ -20,14 +22,18 @@ export default function Header({ navigation }: HeaderProps) {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white"
-            >
-              <QrCode className="w-6 h-6" />
-            </motion.div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">QR Master</span>
+            <Link to={routes.LandingPageRoute.to}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white"
+              >
+                <QrCode className="w-6 h-6" />
+              </motion.div>
+            </Link>
+            <Link to={routes.LandingPageRoute.to}>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">QR Master</span>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -47,7 +53,7 @@ export default function Header({ navigation }: HeaderProps) {
           <div className="hidden md:flex items-center gap-4">
             <DarkModeSwitcher />
             <motion.a
-              href="/login"
+              href={routes.BatchQRGeneratorRoute.build()}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-4 py-2 rounded-lg bg-purple-600 dark:bg-purple-500 text-white font-semibold hover:bg-purple-700 dark:hover:bg-purple-600 transition-colors duration-300"
@@ -88,7 +94,7 @@ export default function Header({ navigation }: HeaderProps) {
               <div className="flex items-center gap-4 pt-4 border-t border-purple-200/20 dark:border-purple-500/20">
                 <DarkModeSwitcher />
                 <a
-                  href="/login"
+                  href={routes.LoginRoute.build()}
                   className="flex-1 px-4 py-2 rounded-lg bg-purple-600 dark:bg-purple-500 text-white font-semibold hover:bg-purple-700 dark:hover:bg-purple-600 transition-colors duration-300"
                 >
                   Get Started

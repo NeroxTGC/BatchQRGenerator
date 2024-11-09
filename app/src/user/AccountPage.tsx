@@ -1,32 +1,83 @@
 import type { User } from 'wasp/entities';
 import { type SubscriptionStatus, prettyPaymentPlanName, parsePaymentPlanId } from '../payment/plans';
 import { getCustomerPortalUrl, useQuery } from 'wasp/client/operations';
+import { updateCurrentUser } from 'wasp/client/operations';
 import { Link } from 'wasp/client/router';
 import { logout } from 'wasp/client/auth';
+import { motion } from 'framer-motion';
+import { LogOut, CreditCard, Mail, User as UserIcon, Info, Edit2, Check, X } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AccountPage({ user }: { user: User }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [description, setDescription] = useState(user.description ?? "I'm a cool customer.");
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const handleUpdateDescription = async () => {
+    try {
+      setIsUpdating(true);
+      await updateCurrentUser({
+        description: description || null
+      });
+      setIsEditing(false);
+    } catch (error) {
+      console.error('Error updating description:', error);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   return (
-    <div className='mt-10 px-6'>
-      <div className='overflow-hidden border border-gray-900/10 shadow-lg sm:rounded-lg mb-4 lg:m-8 dark:border-gray-100/10'>
-        <div className='px-4 py-5 sm:px-6 lg:px-8'>
-          <h3 className='text-base font-semibold leading-6 text-gray-900 dark:text-white'>Account Information</h3>
-        </div>
-        <div className='border-t border-gray-900/10 dark:border-gray-100/10 px-4 py-5 sm:p-0'>
-          <dl className='sm:divide-y sm:divide-gray-900/10 sm:dark:divide-gray-100/10'>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className='min-h-screen bg-gradient-to-br from-purple-50 to-white dark:from-purple-900/20 dark:to-black py-12 px-6 pt-32 transition-colors duration-300'
+    >
+      <div className='max-w-4xl mx-auto'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className='text-center mb-12'
+        >
+          <h2 className='text-4xl font-bold text-gray-900 dark:text-white mb-4'>Account Information</h2>
+          <p className='text-gray-600 dark:text-purple-200'>Manage your account settings and subscription</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className='bg-white/50 dark:bg-purple-900/20 backdrop-blur-sm border border-purple-200 dark:border-purple-500/20 
+                     rounded-2xl overflow-hidden shadow-lg transition-all duration-300'
+        >
+          <dl className='divide-y divide-purple-200 dark:divide-purple-500/20'>
             {!!user.email && (
-              <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6'>
-                <dt className='text-sm font-medium text-gray-500 dark:text-white'>Email address</dt>
-                <dd className='mt-1 text-sm text-gray-900 dark:text-gray-400 sm:col-span-2 sm:mt-0'>{user.email}</dd>
+              <div className='px-6 py-6 flex items-center'>
+                <dt className='flex items-center gap-2 text-gray-500 dark:text-white w-1/3'>
+                  <Mail className="w-5 h-5" />
+                  Email address
+                </dt>
+                <dd className='text-gray-900 dark:text-gray-400 flex-1'>{user.email}</dd>
               </div>
             )}
+
             {!!user.username && (
-              <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6'>
-                <dt className='text-sm font-medium text-gray-500 dark:text-white'>Username</dt>
-                <dd className='mt-1 text-sm text-gray-900 dark:text-gray-400 sm:col-span-2 sm:mt-0'>{user.username}</dd>
+              <div className='px-6 py-6 flex items-center'>
+                <dt className='flex items-center gap-2 text-gray-500 dark:text-white w-1/3'>
+                  <UserIcon className="w-5 h-5" />
+                  Username
+                </dt>
+                <dd className='text-gray-900 dark:text-gray-400 flex-1'>{user.username}</dd>
               </div>
             )}
-            <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6'>
-              <dt className='text-sm font-medium text-gray-500 dark:text-white'>Your Plan</dt>
+
+            <div className='px-6 py-6 flex items-center'>
+              <dt className='flex items-center gap-2 text-gray-500 dark:text-white w-1/3'>
+                <CreditCard className="w-5 h-5" />
+                Your Plan
+              </dt>
               <UserCurrentPaymentPlan
                 subscriptionStatus={user.subscriptionStatus as SubscriptionStatus}
                 subscriptionPlan={user.subscriptionPlan}
@@ -34,22 +85,78 @@ export default function AccountPage({ user }: { user: User }) {
                 credits={user.credits}
               />
             </div>
-            <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6'>
-              <dt className='text-sm font-medium text-gray-500 dark:text-white'>About</dt>
-              <dd className='mt-1 text-sm text-gray-900 dark:text-gray-400 sm:col-span-2 sm:mt-0'>I'm a cool customer.</dd>
+
+            <div className='px-6 py-6 flex items-center'>
+              <dt className='flex items-center gap-2 text-gray-500 dark:text-white w-1/3'>
+                <Info className="w-5 h-5" />
+                About
+              </dt>
+              <dd className='text-gray-900 dark:text-gray-400 flex-1 flex items-center gap-2'>
+                {isEditing ? (
+                  <>
+                    <input
+                      type="text"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      className="flex-1 bg-white dark:bg-gray-800 border border-purple-200 dark:border-purple-500/20 
+                        rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    />
+                    <button
+                      onClick={handleUpdateDescription}
+                      disabled={isUpdating}
+                      className="p-1 rounded-lg bg-green-500/10 text-green-600 dark:text-green-400 
+                       hover:bg-green-500/20 transition-colors duration-200"
+                    >
+                      <Check className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsEditing(false);
+                        setDescription(user.description ?? "I'm a cool customer.");
+                      }}
+                      className="p-1 rounded-lg bg-red-500/10 text-red-600 dark:text-red-400 
+                       hover:bg-red-500/20 transition-colors duration-200"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {description}
+                    <button
+                      onClick={() => setIsEditing(true)}
+                      className="p-1 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 
+                       hover:bg-purple-500/20 transition-colors duration-200"
+                    >
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
+              </dd>
             </div>
           </dl>
-        </div>
-      </div>
-      <div className='inline-flex w-full justify-end'>
-        <button
-          onClick={logout}
-          className='inline-flex justify-center mx-8 py-2 px-4 border border-transparent shadow-md text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className='mt-8 flex justify-end'
         >
-          logout
-        </button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={logout}
+            className='flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 
+                      dark:from-purple-500 dark:to-pink-500 text-white font-semibold hover:shadow-lg 
+                      hover:shadow-purple-500/25 transition-all duration-300'
+          >
+            <LogOut className="w-5 h-5" />
+            Logout
+          </motion.button>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

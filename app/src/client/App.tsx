@@ -3,8 +3,9 @@ import { updateCurrentUser } from 'wasp/client/operations';
 import './Main.css';
 import AppNavBar from './components/AppNavBar';
 import CookieConsentBanner from './components/cookie-consent/Banner';
-import { useMemo, useEffect, ReactNode } from 'react';
+import { useMemo, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 /**
  * use this component to wrap all child components
@@ -43,7 +44,7 @@ export default function App() {
   }, [location]);
 
   return (
-    <>
+    <HelmetProvider context={{}}>
       <div className='min-h-screen dark:text-white dark:bg-boxdark-2'>
         {isAdminDashboard ? (
           <Outlet />
@@ -57,6 +58,6 @@ export default function App() {
         )}
       </div>
       <CookieConsentBanner />
-    </>
+    </HelmetProvider>
   );
 }

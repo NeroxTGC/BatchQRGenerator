@@ -32,6 +32,7 @@ function generateMockUserData(): MockUserData {
   return {
     email: faker.internet.email({ firstName, lastName }),
     username: faker.internet.userName({ firstName, lastName }),
+    description: faker.lorem.sentence(),
     createdAt,
     lastActiveTimestamp,
     isAdmin: false,
