@@ -77,4 +77,9 @@ export const footerNavigation = {
     { name: 'Privacy', href: '#' },
     { name: 'Terms of Service', href: '#' },
   ],
+  legal: [
+    { name: 'Privacy Policy', href: '#' },
+    { name: 'Terms of Service', href: '#' },
+    { name: 'Cookie Policy', href: '#' },
+  ],
 };
