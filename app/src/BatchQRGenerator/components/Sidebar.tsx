@@ -16,7 +16,7 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
   `;
 
   return (
-    <aside className="w-16 bg-white shadow-lg h-[calc(100vh-2rem)] my-4 ml-4 rounded-2xl flex flex-col items-center py-6">
+    <aside className="w-16 bg-white shadow-lg h-full my-4 ml-4 rounded-2xl flex flex-col items-center py-6">
       <nav className="flex-1 w-full flex flex-col items-center space-y-6">
         <button 
           className={getButtonClass('dashboard')}

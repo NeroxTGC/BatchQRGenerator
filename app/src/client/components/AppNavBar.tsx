@@ -28,8 +28,8 @@ export default function AppNavBar() {
 
   const { data: user, isLoading: isUserLoading } = useAuth();
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b border-purple-200/20 dark:border-purple-500/20">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8" aria-label='Global'>
+    <header className="bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b border-purple-200/20 dark:border-purple-500/20">
+      <nav className="w-full px-4 sm:px-6 lg:px-8" aria-label='Global'>
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <Link to={routes.LandingPageRoute.to}>

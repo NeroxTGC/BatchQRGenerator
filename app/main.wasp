@@ -335,6 +335,14 @@ job sendNewsletter {
 }
 //#endregion
 
+
+//#region Not Found
+  route NotFoundRoute { path: "*", to: NotFoundPage }
+page NotFoundPage {
+  component: import { NotFoundPage } from "@src/client/components/NotFoundPage"
+}
+//#endregion
+
 //#region BatchQRGenerator
 route BatchQRGeneratorRoute { path: "/qr-generator", to: BatchQRGeneratorPage }
 page BatchQRGeneratorPage {
@@ -358,5 +366,21 @@ route APIDocsRoute { path: "/qr-generator/api-docs", to: APIDocsPage }
 page APIDocsPage {
   authRequired: true,
   component: import { APIDocsPage } from "@src/BatchQRGenerator/components/APIDocsPage"
+}
+//#endregion
+
+//#region Contact
+route CookiePolicyRoute { path: "/cookie-policy", to: CookiePolicyPage }
+page CookiePolicyPage {
+  component: import { CookiePolicyPage } from "@src/legal/CookiePolicyPage"
+}
+
+route PrivacyPolicyRoute { path: "/privacy-policy", to: PrivacyPolicyPage }
+page PrivacyPolicyPage {
+  component: import { PrivacyPolicyPage } from "@src/legal/PrivacyPolicyPage"
+} 
+route TermsOfServiceRoute { path: "/terms-of-service", to: TermsOfServicePage }
+page TermsOfServicePage {
+  component: import { TermsOfServicePage } from "@src/legal/TermsOfServicePage"
 }
 //#endregion

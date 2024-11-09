@@ -5,7 +5,12 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '../client/cn';
+import Header from '../landing-page/components/Header';
 import Footer from '../landing-page/components/Footer';
+import {
+  navigation,
+  footerNavigation,
+} from '../landing-page/contentSections';
 
 const bestDealPaymentPlanId: PaymentPlanId = PaymentPlanId.Pro;
 
@@ -90,7 +95,8 @@ const PricingPage = () => {
   };
 
   return (
-    <>
+    <>       
+      <Header navigation={navigation} />
       <div className='min-h-screen flex flex-col bg-gradient-to-br from-purple-50 to-white dark:from-purple-900/20 dark:to-black transition-colors duration-300'>
         <div className='flex-grow mx-auto max-w-7xl px-6 lg:px-8 py-24 lg:py-32'>
           <div id='pricing' className='mx-auto max-w-4xl text-center'>
@@ -204,12 +210,11 @@ const PricingPage = () => {
           company: [
             { name: 'About', href: '#about' },
             { name: 'Blog', href: '#blog' },
-            { name: 'Contact', href: '#contact' },
           ],
           legal: [
-            { name: 'Privacy', href: '#privacy' },
-            { name: 'Terms', href: '#terms' },
-            { name: 'Cookie Policy', href: '#cookies' },
+            { name: 'Privacy Policy', href: '/privacy-policy' },
+            { name: 'Terms of Service', href: '/terms-of-service' },
+            { name: 'Cookie Policy', href: '/cookie-policy' },
           ],
         }} 
       />

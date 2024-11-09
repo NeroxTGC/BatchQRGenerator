@@ -158,11 +158,10 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
-
-      <div className="flex">
+    <div className="h-[90dvh] bg-gradient-to-br from-indigo-50 via-white to-purple-50 p-4">
+      <div className="flex h-[calc(100%-3rem)] max-h-[650px]">
         <Sidebar onNavigate={setCurrentPage} currentPage={currentPage} />
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-8 overflow-auto">
           <div className="mx-auto">
             {renderPage()}
           </div>
