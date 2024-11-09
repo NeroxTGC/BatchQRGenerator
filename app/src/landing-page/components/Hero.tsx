@@ -81,9 +81,16 @@ const Hero = () => {
               TODO: Batch QR Code Generator
             </Link>
           </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+          >
+          </motion.div>
         </motion.div>
+        
+        
       </div>
-
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/50 to-transparent dark:from-black/50 dark:to-transparent transition-colors duration-300" />
     </div>
   );

@@ -12,7 +12,7 @@ import { UserMenuItems } from '../../user/UserMenuItems';
 import { motion } from 'framer-motion';
 
 const navigation = [
-  { name: 'QR Generator', href: routes.BatchQRGeneratorRoute.build() },
+  { name: 'Features', href: routes.LandingPageRoute.build() },
   { name: 'Pricing', href: routes.PricingPageRoute.build() },
   { name: 'Documentation', href: DocsUrl },
 ];

@@ -346,13 +346,11 @@ page NotFoundPage {
 //#region BatchQRGenerator
 route BatchQRGeneratorRoute { path: "/todo/qr-generator", to: BatchQRGeneratorPage }
 page BatchQRGeneratorPage {
-  authRequired: true,
   component: import { App } from "@src/BatchQRGenerator/App"
 }
 
 route QuickGenerateRoute { path: "/todo/qr-generator/quick", to: QuickGeneratePage }
 page QuickGeneratePage {
-  authRequired: true,
   component: import { QuickGeneratePage } from "@src/BatchQRGenerator/components/QuickGeneratePage"
 }
 

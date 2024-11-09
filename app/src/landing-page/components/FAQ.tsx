@@ -30,19 +30,8 @@ export default function FAQ() {
 
   return (
     <div className="bg-white dark:bg-black py-24 relative overflow-hidden transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Frequently Asked Questions</h2>
-          <p className="text-gray-600 dark:text-purple-200">Everything you need to know about our service</p>
-        </motion.div>
-
-        <div className="space-y-4">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-4 md:space-y-6">
           {faqs.map((faq, index) => (
             <motion.div
               key={index}
@@ -58,7 +47,7 @@ export default function FAQ() {
                          dark:from-purple-900/40 dark:to-black hover:from-purple-100 hover:to-purple-50
                          dark:hover:from-purple-900/60 dark:hover:to-purple-900/40 transition-all duration-300"
               >
-                <span className="text-lg font-semibold text-gray-900 dark:text-white">{faq.question}</span>
+                <span className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">{faq.question}</span>
                 {openIndex === index ? (
                   <Minus className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0" />
                 ) : (

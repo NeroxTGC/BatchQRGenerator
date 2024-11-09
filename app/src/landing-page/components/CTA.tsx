@@ -55,29 +55,31 @@ export default function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="px-4 py-8 md:py-12 lg:py-16"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 
-                       dark:from-purple-500 dark:to-pink-500 text-white font-semibold 
-                       flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/25 
-                       transition-all duration-300"
-            >
-              Get Started Free
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg bg-purple-500/10 backdrop-blur-sm 
-                       border border-purple-500/20 text-gray-900 dark:text-white 
-                       font-semibold hover:bg-purple-500/20 transition-all duration-300"
-            >
-              Contact Sales
-            </motion.button>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 
+                         dark:from-purple-500 dark:to-pink-500 text-white font-semibold 
+                         flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/25 
+                         transition-all duration-300"
+              >
+                Get Started Free
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 rounded-lg bg-purple-500/10 backdrop-blur-sm 
+                         border border-purple-500/20 text-gray-900 dark:text-white 
+                         font-semibold hover:bg-purple-500/20 transition-all duration-300"
+              >
+                Contact Sales
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </div>

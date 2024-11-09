@@ -61,7 +61,7 @@ export default function Pricing() {
           <p className="text-gray-600 dark:text-purple-200">Choose the plan that's right for you</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {plans.map((plan, index) => (
             <motion.div
               key={index}
@@ -70,7 +70,7 @@ export default function Pricing() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className={`p-8 rounded-2xl relative ${
+              className={`p-6 md:p-8 lg:p-10 rounded-2xl relative ${
                 plan.popular
                   ? 'bg-gradient-to-br from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 text-white'
                   : 'bg-white dark:bg-purple-900/20 border border-purple-200 dark:border-purple-500/20'
@@ -84,7 +84,7 @@ export default function Pricing() {
               )}
 
               <div className="mb-8">
-                <h3 className={`text-2xl font-bold mb-2 ${plan.popular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
+                <h3 className={`text-xl md:text-2xl lg:text-3xl font-bold mb-2 ${plan.popular ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
                   {plan.name}
                 </h3>
                 <div className="flex items-baseline gap-2">

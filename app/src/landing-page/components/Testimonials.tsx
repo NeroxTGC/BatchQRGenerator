@@ -44,7 +44,7 @@ export default function Testimonials() {
           <p className="text-gray-600 dark:text-purple-200">Don't just take our word for it</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -53,7 +53,7 @@ export default function Testimonials() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
-              className="p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-white 
+              className="p-4 md:p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-white 
                          dark:from-purple-900/40 dark:to-black border border-purple-200 
                          dark:border-purple-500/20 hover:border-purple-300 dark:hover:border-purple-500/40 
                          transition-all duration-300 group"

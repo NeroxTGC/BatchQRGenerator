@@ -37,7 +37,7 @@ const features = [
 
 export default function Features() {
   return (
-    <div className="bg-white dark:bg-black py-24 relative overflow-hidden transition-colors duration-300">
+    <div id="features" className="bg-white dark:bg-black py-24 relative overflow-hidden transition-colors duration-300">
       <div className="absolute inset-0 bg-gradient-to-b from-purple-100/50 to-transparent dark:from-purple-900/20 dark:to-transparent transition-colors duration-300" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -54,7 +54,7 @@ export default function Features() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={index}
