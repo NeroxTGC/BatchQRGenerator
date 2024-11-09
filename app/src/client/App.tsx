@@ -1,11 +1,17 @@
 import { useAuth } from 'wasp/client/auth';
 import { updateCurrentUser } from 'wasp/client/operations';
 import './Main.css';
+import {
+  footerNavigation,
+} from '../landing-page/contentSections';
 import AppNavBar from './components/AppNavBar';
 import CookieConsentBanner from './components/cookie-consent/Banner';
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, lazy, Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+
+const Footer = lazy(() => import('../landing-page/components/Footer'));
+
 
 /**
  * use this component to wrap all child components
@@ -16,7 +22,7 @@ export default function App() {
   const { data: user } = useAuth();
 
   const shouldDisplayAppNavBar = useMemo(() => {
-    return location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/pricing';
+    return location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/signup' && location.pathname !== '/privacy-policy' && location.pathname !== '/terms-of-service' && location.pathname !== '/cookie-policy';
   }, [location]);
 
   const isAdminDashboard = useMemo(() => {
@@ -57,6 +63,9 @@ export default function App() {
           </>
         )}
       </div>
+      <Suspense fallback={<div>Loading...</div>}>
+          <Footer footerNavigation={footerNavigation} />
+      </Suspense>
       <CookieConsentBanner />
     </HelmetProvider>
   );

@@ -65,21 +65,21 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
-              to={routes.BatchQRGeneratorRoute.to}
+              to={routes.QRCodeGeneratorRoute.to}
               className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 text-white font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
-              aria-label="Start Generating QR Codes"
+              aria-label="Go to QR Code Generator"
             >
               <QrCode className="w-5 h-5" aria-hidden="true" />
-              Start Generating
+              QR Code Generator
             </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg bg-purple-500/10 backdrop-blur-sm border border-purple-500/20 text-gray-900 dark:text-white font-semibold hover:bg-purple-500/20 transition-all duration-300"
-              aria-label="Learn More About QR Code Generation"
+            <Link
+              to={routes.BulkQRCodeGeneratorRoute.to}
+              className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 text-white font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+              aria-label="Go to Batch QR Code Generator"
             >
-              Learn More
-            </motion.button>
+              <QrCode className="w-5 h-5" aria-hidden="true" />
+              Batch QR Code Generator
+            </Link>
           </motion.div>
         </motion.div>
       </div>

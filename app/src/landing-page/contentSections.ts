@@ -7,13 +7,12 @@ export const navigation = [
   { name: 'Features', href: '#features' },
   { name: 'Pricing', href: routes.PricingPageRoute.build() },
   { name: 'Documentation', href: DocsUrl },
-  { name: 'Blog', href: BlogUrl },
+  // { name: 'Blog', href: BlogUrl },
 ];
 
 export const footerNavigation = {
   app: [
     { name: 'Documentation', href: DocsUrl },
-    { name: 'Blog', href: BlogUrl },
   ],
   company: [
     { name: 'About', href: 'https://wasp-lang.dev' },

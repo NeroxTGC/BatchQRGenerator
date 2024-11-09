@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { UserMenuItems } from './UserMenuItems';
 import { cn } from '../client/cn';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 const DropdownUser = ({ user }: { user: Partial<User> }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -24,7 +26,6 @@ const DropdownUser = ({ user }: { user: Partial<User> }) => {
     return () => document.removeEventListener('click', clickHandler);
   });
 
-  // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!dropdownOpen || keyCode !== 27) return;
@@ -36,46 +37,40 @@ const DropdownUser = ({ user }: { user: Partial<User> }) => {
 
   return (
     <div className='relative'>
-      <button
+      <motion.button
         ref={trigger}
         onClick={toggleDropdown}
-        className='flex items-center gap-4 duration-300 ease-in-out text-gray-900 hover:text-yellow-500'
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className='flex items-center gap-2 p-2 rounded-lg bg-purple-500/10 backdrop-blur-sm 
+                  border border-purple-500/20 text-gray-900 dark:text-white hover:bg-purple-500/20 
+                  transition-all duration-300'
       >
         <span className='hidden text-right lg:block'>
-          <span className='block text-sm font-medium dark:text-white'>{user.username}</span>
+          <span className='block text-sm font-medium text-gray-900 dark:text-white'>{user.username}</span>
         </span>
-        <CgProfile size='1.1rem' className='ml-1 mt-[0.1rem] dark:text-white' />
-        <svg
-          className={cn('hidden fill-current dark:fill-white sm:block', {
+        <CgProfile className='text-gray-900 dark:text-white' size='1.1rem' />
+        <ChevronDown 
+          className={cn('w-4 h-4 transition-transform duration-200 text-gray-900 dark:text-white', {
             'rotate-180': dropdownOpen,
           })}
-          width='12'
-          height='8'
-          viewBox='0 0 12 8'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            fillRule='evenodd'
-            clipRule='evenodd'
-            d='M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z'
-            fill=''
-          />
-        </svg>
-      </button>
+        />
+      </motion.button>
 
-      {/* <!-- Dropdown --> */}
-      <div
-        ref={dropdown}
-        className={cn(
-          'absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark dark:text-white',
-          {
-            hidden: !dropdownOpen,
-          }
+      <AnimatePresence>
+        {dropdownOpen && (
+          <motion.div
+            ref={dropdown}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className='absolute right-0 mt-2 w-56 rounded-xl bg-white dark:bg-gray-900/95 
+                      backdrop-blur-lg border border-purple-500/20 shadow-xl'
+          >
+            <UserMenuItems user={user} setMobileMenuOpen={toggleDropdown} />
+          </motion.div>
         )}
-      >
-        <UserMenuItems user={user} setMobileMenuOpen={toggleDropdown} />
-      </div>
+      </AnimatePresence>
     </div>
   );
 };

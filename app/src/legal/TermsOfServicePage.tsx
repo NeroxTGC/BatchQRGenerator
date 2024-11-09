@@ -1,5 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import Header from '../landing-page/components/Header';
+import {
+  navigation,
+} from '../landing-page/contentSections';
 
 const TermsOfServicePage: React.FC = () => {
   return (
@@ -12,6 +16,7 @@ const TermsOfServicePage: React.FC = () => {
         />
         <meta name="robots" content="noindex" />
       </Helmet>
+      <Header navigation={navigation} />
 
       <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-20">
         <h1 className="text-4xl font-bold mb-6">Terms of Service</h1>

@@ -2,7 +2,6 @@ import { Helmet } from 'react-helmet-async';
 import { Suspense, lazy } from 'react';
 import {
   navigation,
-  footerNavigation,
 } from './contentSections';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -16,7 +15,6 @@ const Testimonials = lazy(() => import('./components/Testimonials'));
 const Pricing = lazy(() => import('./components/Pricing'));
 const FAQ = lazy(() => import('./components/FAQ'));
 const CTA = lazy(() => import('./components/CTA'));
-const Footer = lazy(() => import('./components/Footer'));
 
 export default function LandingPage() {
   return (
@@ -43,9 +41,6 @@ export default function LandingPage() {
             <CTA/>
           </Suspense>
         </main>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Footer footerNavigation={footerNavigation} />
-        </Suspense>
       </div>
     </>
   );

@@ -9,12 +9,12 @@ import { DocsUrl, BlogUrl } from '../../shared/common';
 import DarkModeSwitcher from './DarkModeSwitcher';
 import DropdownUser from '../../user/DropdownUser';
 import { UserMenuItems } from '../../user/UserMenuItems';
+import { motion } from 'framer-motion';
 
 const navigation = [
   { name: 'QR Generator', href: routes.BatchQRGeneratorRoute.build() },
   { name: 'Pricing', href: routes.PricingPageRoute.build() },
   { name: 'Documentation', href: DocsUrl },
-  { name: 'Blog', href: BlogUrl },
 ];
 
 const NavLogo = () => (
@@ -28,12 +28,18 @@ export default function AppNavBar() {
 
   const { data: user, isLoading: isUserLoading } = useAuth();
   return (
-    <header className="bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b border-purple-200/20 dark:border-purple-500/20">
-      <nav className="w-full px-4 sm:px-6 lg:px-8" aria-label='Global'>
-        <div className="flex items-center justify-between py-4">
+    <header className="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b border-purple-200/20 dark:border-purple-500/20">
+      <nav className="px-8">
+        <div className="flex items-center justify-between py-4 max-w-[1920px] mx-auto">
           <div className="flex items-center gap-2">
             <Link to={routes.LandingPageRoute.to}>
-              <NavLogo />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white"
+              >
+                <QrCode className="w-6 h-6" />
+              </motion.div>
             </Link>
             <Link to={routes.LandingPageRoute.to}>
               <span className="text-xl font-bold text-gray-900 dark:text-white">QR Master</span>

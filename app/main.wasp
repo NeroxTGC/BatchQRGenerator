@@ -344,25 +344,25 @@ page NotFoundPage {
 //#endregion
 
 //#region BatchQRGenerator
-route BatchQRGeneratorRoute { path: "/qr-generator", to: BatchQRGeneratorPage }
+route BatchQRGeneratorRoute { path: "/todo/qr-generator", to: BatchQRGeneratorPage }
 page BatchQRGeneratorPage {
   authRequired: true,
   component: import { App } from "@src/BatchQRGenerator/App"
 }
 
-route QuickGenerateRoute { path: "/qr-generator/quick", to: QuickGeneratePage }
+route QuickGenerateRoute { path: "/todo/qr-generator/quick", to: QuickGeneratePage }
 page QuickGeneratePage {
   authRequired: true,
   component: import { QuickGeneratePage } from "@src/BatchQRGenerator/components/QuickGeneratePage"
 }
 
-route ProjectsRoute { path: "/qr-generator/projects", to: ProjectsPage }
+route ProjectsRoute { path: "/todo/qr-generator/projects", to: ProjectsPage }
 page ProjectsPage {
   authRequired: true,
   component: import { ProjectsPage } from "@src/BatchQRGenerator/components/ProjectsPage"
 }
 
-route APIDocsRoute { path: "/qr-generator/api-docs", to: APIDocsPage }
+route APIDocsRoute { path: "/todo/qr-generator/api-docs", to: APIDocsPage }
 page APIDocsPage {
   authRequired: true,
   component: import { APIDocsPage } from "@src/BatchQRGenerator/components/APIDocsPage"
@@ -384,3 +384,14 @@ page TermsOfServicePage {
   component: import { TermsOfServicePage } from "@src/legal/TermsOfServicePage"
 }
 //#endregion
+
+route QRCodeGeneratorRoute { path: "/qr-code-generator", to: QRCodeGeneratorPage }
+page QRCodeGeneratorPage {
+  component: import { QRCodeGeneratorPage } from "@src/pages/QRCodeGeneratorPage.tsx"
+} 
+
+route BulkQRCodeGeneratorRoute { path: "/bulk-qr-code-generator", to: BulkQRCodeGeneratorPage }
+page BulkQRCodeGeneratorPage {
+  component: import { BulkQRCodeGeneratorPage } from "@src/pages/BulkQRCodeGeneratorPage.tsx"
+} 
+
