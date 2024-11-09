@@ -1,5 +1,4 @@
 import React from 'react';
-import { Palette } from 'lucide-react';
 
 interface ColorPickerProps {
   label: string;
@@ -9,7 +8,7 @@ interface ColorPickerProps {
 
 export default function ColorPicker({ label, value, onChange }: ColorPickerProps) {
   return (
-    <div className="w-1/2">
+    <div className="flex-1 max-w-[48%]">
       <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
         {label}
       </label>
@@ -37,4 +36,4 @@ export default function ColorPicker({ label, value, onChange }: ColorPickerProps
       </div>
     </div>
   );
-}
+} 

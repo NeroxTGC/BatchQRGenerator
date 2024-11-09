@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Sliders, Layout, Grid, Download, Upload } from 'lucide-react';
 import ColorPicker from '../common/ColorPicker';
 import { QRSettings } from '../../types';
-import { colorPresets, gradientPresets } from '../../constants/colorPresets';
+import { colorPresets } from '../../constants/colorPresets';
 
 interface Props {
   settings: QRSettings;
@@ -198,36 +198,6 @@ export default function BatchCustomization({ settings, onUpdate }: Props) {
                   <div className="w-full aspect-square rounded-lg mb-2 overflow-hidden border border-gray-200">
                     <div className="h-1/2 w-full" style={{ backgroundColor: preset.background }} />
                     <div className="h-1/2 w-full" style={{ backgroundColor: preset.foreground }} />
-                  </div>
-                  <span className="text-xs text-gray-600 group-hover:text-gray-900 text-center block">
-                    {preset.name}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <label className="block text-sm font-medium text-gray-700 mb-3 mt-6">
-              Gradient Presets
-            </label>
-            <div className="grid grid-cols-5 gap-3">
-              {gradientPresets.map((preset) => (
-                <button
-                  key={preset.id}
-                  onClick={() => onUpdate({
-                    ...settings,
-                    style: {
-                      ...settings.style,
-                      foreground: preset.foreground,
-                      background: preset.background,
-                      gradient: preset.foregroundGradient
-                    }
-                  })}
-                  className="group p-2 rounded-lg hover:bg-gray-50 transition-colors"
-                  title={preset.description}
-                >
-                  <div className="w-full aspect-square rounded-lg mb-2 overflow-hidden border border-gray-200">
-                    <div className="h-1/2 w-full" style={{ backgroundColor: preset.background }} />
-                    <div className="h-1/2 w-full" style={{ background: preset.foregroundGradient }} />
                   </div>
                   <span className="text-xs text-gray-600 group-hover:text-gray-900 text-center block">
                     {preset.name}

@@ -27,3 +27,5 @@ export interface QRSettings {
     gradient?: string;
   };
 }
+
+export type QRContentType = 'URL' | 'vCard' | 'Text' | 'Email' | 'SMS' | 'WiFi';
