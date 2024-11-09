@@ -29,13 +29,13 @@ const features: FeatureItem[] = [
   {
     name: 'QR Code Generator',
     description: 'Create multiple QR codes at once',
-    href: '/qr-code-generator',
+    href: '/todo/qr-generator/quick',
     icon: Database
   },
   {
     name: 'Bulk QR Code Generator',
     description: 'Scan QR codes instantly',
-    href: '/bulk-qr-code-generator',
+    href: '/todo/qr-generator/projects',
     icon: Scan
   }
 ];

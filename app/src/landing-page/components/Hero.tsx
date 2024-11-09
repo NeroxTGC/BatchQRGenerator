@@ -65,7 +65,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
-              to={routes.QRCodeGeneratorRoute.to}
+              to={routes.QuickGenerateRoute.to}
               className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 text-white font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
               aria-label="Go to QR Code Generator"
             >
@@ -73,12 +73,12 @@ const Hero = () => {
               QR Code Generator
             </Link>
             <Link
-              to={routes.BulkQRCodeGeneratorRoute.to}
+              to={routes.BatchQRGeneratorRoute.to}
               className="px-8 py-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-500 dark:to-pink-500 text-white font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
-              aria-label="Go to Batch QR Code Generator"
+              aria-label="Go to Bulk QR Code Generator"
             >
               <QrCode className="w-5 h-5" aria-hidden="true" />
-              Batch QR Code Generator
+              TODO: Batch QR Code Generator
             </Link>
           </motion.div>
         </motion.div>

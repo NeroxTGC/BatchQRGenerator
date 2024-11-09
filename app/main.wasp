@@ -62,7 +62,7 @@ app BatchQRGenerator {
     },
     onAfterSignup: import { onAfterSignup } from "@src/auth/hooks",
     onAuthFailedRedirectTo: "/login",
-    onAuthSucceededRedirectTo: "/qr-generator",
+    onAuthSucceededRedirectTo: "/todo/qr-generator",
   },
 
   db: {

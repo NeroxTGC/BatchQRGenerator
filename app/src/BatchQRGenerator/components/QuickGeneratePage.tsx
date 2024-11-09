@@ -75,7 +75,7 @@ const QuickGeneratePage = ({ onSaveToProject, projects, onAddToExistingProject }
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto pt-32">
       <div className="bg-white rounded-2xl shadow-xl p-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Quick QR Code Generator</h2>
         
