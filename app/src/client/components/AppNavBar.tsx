@@ -12,9 +12,8 @@ import { UserMenuItems } from '../../user/UserMenuItems';
 import { motion } from 'framer-motion';
 
 const navigation = [
-  { name: 'Features', href: routes.LandingPageRoute.build() },
   { name: 'Pricing', href: routes.PricingPageRoute.build() },
-  { name: 'Documentation', href: DocsUrl },
+  { name: 'Help', href: DocsUrl },
 ];
 
 const NavLogo = () => (

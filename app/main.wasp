@@ -393,3 +393,33 @@ page BulkQRCodeGeneratorPage {
   component: import { BulkQRCodeGeneratorPage } from "@src/pages/BulkQRCodeGeneratorPage.tsx"
 } 
 
+query getProjects {
+  fn: import { getProjects } from "@src/BatchQRGenerator/operations",
+  entities: [User, QRProject]
+}
+
+query getProjectById {
+  fn: import { getProjectById } from "@src/BatchQRGenerator/operations", 
+  entities: [QRProject, QRCode]
+}
+
+action createProject {
+  fn: import { createProject } from "@src/BatchQRGenerator/operations",
+  entities: [User, QRProject]
+}
+
+action updateProject {
+  fn: import { updateProject } from "@src/BatchQRGenerator/operations",
+  entities: [QRProject]
+}
+
+action deleteProject {
+  fn: import { deleteProject } from "@src/BatchQRGenerator/operations",
+  entities: [QRProject]
+}
+
+action createQRCode {
+  fn: import { createQRCode } from "@src/BatchQRGenerator/operations",
+  entities: [QRProject, QRCode]
+}
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { X, Upload } from 'lucide-react';
 import { createProject } from '../../features/projects/operations';
 import { QRProject } from '../../types';
 
@@ -8,42 +8,38 @@ interface Props {
   onCreate: (project: QRProject) => void;
 }
 
-export function NewProjectModal({ onClose, onCreate }: Props) {
+export default function NewProjectModal({ onClose, onCreate }: Props) {
   const [name, setName] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState('');
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: {
-      'text/csv': ['.csv'],
-      'text/plain': ['.txt'],
-      'application/vnd.ms-excel': ['.xls'],
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx']
-    },
-    multiple: false,
-    onDrop: async (acceptedFiles) => {
-      if (acceptedFiles.length === 0) return;
-      
-      try {
-        setIsLoading(true);
-        setError(null);
-        const project = await createProject(name, acceptedFiles[0]);
-        onCreate(project);
-      } catch (err) {
-        setError('Failed to create project. Please try again.');
-        console.error('Error:', err);
-      } finally {
-        setIsLoading(false);
-      }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!name.trim()) {
+      setError('Project name is required');
+      return;
     }
-  });
+
+    try {
+      const project = await createProject(name, file || undefined);
+      onCreate(project);
+    } catch (err) {
+      setError('Error creating project');
+    }
+  };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl max-w-md w-full p-6">
-        <h2 className="text-xl font-bold text-gray-800 mb-4">Create New Project</h2>
-        
-        <div className="space-y-4">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl p-6 w-full max-w-md">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-xl font-bold text-gray-800">New Project</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Project Name
@@ -57,38 +53,50 @@ export function NewProjectModal({ onClose, onCreate }: Props) {
             />
           </div>
 
-          <div {...getRootProps()} className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer
-            ${isDragActive ? 'border-indigo-500 bg-indigo-50' : 'border-gray-300 hover:border-indigo-500'}`}>
-            <input {...getInputProps()} />
-            {isDragActive ? (
-              <p className="text-indigo-600">Drop the files here...</p>
-            ) : (
-              <p className="text-gray-600">Drag & drop files here, or click to select files</p>
-            )}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Data File (Optional)
+            </label>
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+              <input
+                type="file"
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                className="hidden"
+                id="file-upload"
+              />
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer flex flex-col items-center"
+              >
+                <Upload className="w-8 h-8 text-gray-400 mb-2" />
+                <span className="text-sm text-gray-500">
+                  {file ? file.name : 'Click to upload or drag and drop'}
+                </span>
+              </label>
+            </div>
           </div>
 
           {error && (
-            <p className="text-sm text-red-600">{error}</p>
+            <p className="text-red-500 text-sm">{error}</p>
           )}
 
-          <div className="flex justify-end space-x-3 mt-6">
+          <div className="flex justify-end space-x-3">
             <button
+              type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+              className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
             >
               Cancel
             </button>
             <button
-              disabled={!name || isLoading}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+              type="submit"
+              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
             >
-              {isLoading ? 'Creating...' : 'Create Project'}
+              Create Project
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
 }
-
-export default NewProjectModal;

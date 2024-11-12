@@ -30,6 +30,7 @@ model User {
   tasks                     Task[]
   files                     File[]
   description               String?
+  qrProjects                QRProject[]
 }
 
 model GptResponse {
@@ -113,4 +114,29 @@ model ContactFormMessage {
   content                   String
   isRead                    Boolean         @default(false)
   repliedAt                 DateTime?
+}
+
+model QRProject {
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  name        String
+  description String?
+  
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String
+  
+  qrCodes     QRCode[]
+  settings    Json        @default("{}")
+}
+
+model QRCode {
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  content     String
+  label       String?
+  style       Json?
+  
+  project     QRProject   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String
 }

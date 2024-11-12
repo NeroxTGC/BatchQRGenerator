@@ -13,20 +13,14 @@ export const QRGenerator: React.FC<QRGeneratorProps> = ({
   const [text, setText] = useState(defaultValue)
   const [qrSize, setQrSize] = useState(size)
 
-  const handleDownload = () => {
+  const handleDownloadPNG = () => {
     const canvas = document.querySelector('canvas')
     if (!canvas) return
-
-    const pngUrl = canvas
-      .toDataURL('image/png')
-      .replace('image/png', 'image/octet-stream')
     
-    const downloadLink = document.createElement('a')
-    downloadLink.href = pngUrl
-    downloadLink.download = 'qrcode.png'
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
+    const link = document.createElement('a')
+    link.download = 'qrcode.png'
+    link.href = canvas.toDataURL('image/png')
+    link.click()
   }
 
   return (
@@ -74,16 +68,18 @@ export const QRGenerator: React.FC<QRGeneratorProps> = ({
         />
       </div>
 
-      <button
-        onClick={handleDownload}
-        disabled={!text}
-        className='px-4 py-2 bg-blue-500 text-white rounded-md 
-          hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed
-          dark:disabled:bg-gray-700 dark:hover:bg-blue-700
-          transition-colors duration-200'
-      >
-        Download QR
-      </button>
+      <div className='flex gap-2'>
+        <button
+          onClick={handleDownloadPNG}
+          disabled={!text}
+          className='px-4 py-2 bg-blue-500 text-white rounded-md 
+            hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed
+            dark:disabled:bg-gray-700 dark:hover:bg-blue-700
+            transition-colors duration-200'
+        >
+          Download PNG
+        </button>
+      </div>
     </div>
   )
 }

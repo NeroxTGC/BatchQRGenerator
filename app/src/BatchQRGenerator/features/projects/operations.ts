@@ -1,9 +1,13 @@
 import { QRProject, QRData } from '../../types';
 
-export async function createProject(name: string, file: File): Promise<QRProject> {
+export async function createProject(name: string, file?: File): Promise<QRProject> {
   try {
-    const fileContent = await readFileContent(file);
-    const qrData = parseFileContent(fileContent);
+    let qrData = [];
+    
+    if (file) {
+      const fileContent = await readFileContent(file);
+      qrData = parseFileContent(fileContent);
+    }
     
     const newProject: QRProject = {
       id: crypto.randomUUID(),

@@ -29,6 +29,10 @@ export default function App() {
     return location.pathname.startsWith('/admin');
   }, [location]);
 
+  const shouldShowFooter = useMemo(() => {
+    return !(location.pathname.includes('/todo/') && user);
+  }, [location.pathname, user]);
+
   useEffect(() => {
     if (user) {
       const lastSeenAt = new Date(user.lastActiveTimestamp);
@@ -63,9 +67,11 @@ export default function App() {
           </>
         )}
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
+      {shouldShowFooter && (
+        <Suspense fallback={<div>Loading...</div>}>
           <Footer footerNavigation={footerNavigation} />
-      </Suspense>
+        </Suspense>
+      )}
       <CookieConsentBanner />
     </HelmetProvider>
   );
